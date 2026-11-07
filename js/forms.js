@@ -55,14 +55,15 @@
     });
   });
 
-  // Each subject goes to the matching CCN inbox
-  const inboxes = {
-    general: 'ccnlondon2025@gmail.com',
-    client: 'ccnlondonclients@gmail.com',
-    partnership: 'ccnlondonexternal@gmail.com',
-    recruiting: 'ccnlondonrecruiting@gmail.com',
-    other: 'ccnlondon2025@gmail.com',
-  };
+  // All contact form messages (including applications) go to the main inbox
+  const INBOX = 'ccnlondon2025@gmail.com';
+
+  // Preselect the subject from the URL, e.g. contact.html?subject=recruiting
+  const subjectSelect = form.querySelector('#subject');
+  const presetSubject = new URLSearchParams(window.location.search).get('subject');
+  if (presetSubject && subjectSelect.querySelector(`option[value="${CSS.escape(presetSubject)}"]`)) {
+    subjectSelect.value = presetSubject;
+  }
 
   const status = form.querySelector('#form-status');
 
@@ -94,9 +95,9 @@
       return;
     }
 
-    const [name, email, subject, message] = fields.map((f) => f.input.value.trim());
-    const subjectLabel = form.querySelector('#subject').selectedOptions[0].textContent;
-    const to = inboxes[subject] || inboxes.general;
+    const [name, email, , message] = fields.map((f) => f.input.value.trim());
+    const subjectLabel = subjectSelect.selectedOptions[0].textContent;
+    const to = INBOX;
 
     const mailSubject = `${subjectLabel} — ${name}`;
     const mailBody = `${message}\n\n—\n${name}\n${email}`;
