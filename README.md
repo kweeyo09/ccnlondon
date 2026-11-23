@@ -2,7 +2,7 @@
 
 Website for the Cambridge Consulting Network London Office — a pro-bono student consultancy at London's top universities.
 
-**Live:** [ccnlondon-v1.vercel.app](https://ccnlondon-v1.vercel.app/)
+**Live:** [ccnlondon-navy.vercel.app](https://ccnlondon-navy.vercel.app/)
 
 ## About
 
